@@ -9,6 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "async": "^3.2.5",
+    "boxicons": "^2.1.4",
+    "install": "^0.13.0",
     "lit": "^3.1.2"
   },
   "devDependencies": {

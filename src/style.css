@@ -10,16 +10,16 @@ body{
 }
 
 aside{
-  width: 20%;
+  width: 30%;
   height: 100vh;
 }
 
 main{
-  background-color: red;
-  width: 60%;
+  width: 40%;
+  height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(9, 1fr);
+  grid-template-rows: repeat(10, 1fr);
   grid-template-areas: 
       "main__header"
       "main__middleup"
@@ -27,33 +27,32 @@ main{
       "main__middleup"
       "main__middleup"
       "main__middleup"
+      "main__middleup"
       "main__middledown"
       "main__middledown"
       "main__middledown"
-      
       ;
 }
 
 .main__header{
   grid-area: main__header;
-  background-color: green;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5vw;
+  font-size: 1vw;
 }
 
 .main__middledown{
   grid-area: main__middledown;
-  background-color: blue;
+  padding: 0 8vw;
 }
 
 .main__middleup{
   grid-area: main__middleup;
-  background-color: violet;
+  padding: 3vw;
+  
 }
 
 .main__footer{
   grid-area: main__footer;
-  background-color: yellow;
 }

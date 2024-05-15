@@ -1,8 +1,10 @@
+import { getDataTracks } from "../data/getData.js";
 import { LitElement, html, css} from "lit";
 import 'boxicons'
 class Myelementup extends LitElement{
   constructor(){
     super();
+    this.tracks = {};
   }
   static styles = css`
     *{
@@ -60,11 +62,16 @@ class Myelementup extends LitElement{
       background-color: green;
     }
   `
+  async connectedCallback(){
+    super.connectedCallback();
+    this.tracks = await getDataTracks();
+  }
+
   render(){
     return html`
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <div class="middleup__cont__img">
-      <img src="./src/storage/i.png">
+      <img src="${this.tracks[0].album.images[0].url}">
     </div>
     <div class="middleup__description">
       <box-icon name='plus'></box-icon>

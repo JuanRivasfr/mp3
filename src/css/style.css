@@ -6,16 +6,28 @@
 
 body{
   width: 100vw;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "discover main tracklist";
 }
 
 aside{
-  width: 30%;
+  width: 100%;
   height: 100vh;
 }
 
+.discover{
+  grid-area: discover;
+}
+
+.tracklist{
+  grid-area: tracklist;
+}
+
 main{
-  width: 40%;
+  grid-area: main;
+  width: 100%;
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr;

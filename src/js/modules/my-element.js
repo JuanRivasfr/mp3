@@ -1,11 +1,29 @@
-import { getDataTracks } from "../data/getData.js";
 import { LitElement, html, css} from "lit";
 import 'boxicons'
-class Myelementup extends LitElement{
+import { obtenerDatosSpotify} from '../data/getData.js'
+
+export class Myelementup extends LitElement{
+  
+
   constructor(){
     super();
-    this.tracks = {};
+    this.trackInfo = {};
   }
+
+  async connectedCallback() {
+    super.connectedCallback();
+    await this.obtenerDatosyActualizar();
+  }
+
+  async obtenerDatosyActualizar() {
+    try {
+      this.trackInfo = await obtenerDatosSpotify();
+    } catch(error) {
+      console.error('Error al obtener los datos de Spotify:' , error)
+    }
+    this.requestUpdate();
+  }
+
   static styles = css`
     *{
       padding: 0;
@@ -17,12 +35,11 @@ class Myelementup extends LitElement{
       display: flex;
       justify-content: center;
       & img{
-        width: 60%
+        width: 50%
       }
     }
     .middleup__description{
       width: 100%;
-      
       display: flex;
       justify-content: space-evenly;
       align-items: center;
@@ -62,22 +79,19 @@ class Myelementup extends LitElement{
       background-color: green;
     }
   `
-  async connectedCallback(){
-    super.connectedCallback();
-    this.tracks = await getDataTracks();
-  }
+
 
   render(){
     return html`
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <div class="middleup__cont__img">
-      <img src="${this.tracks[0].album.images[0].url}">
+      <img src="${this.trackInfo.img}">
     </div>
     <div class="middleup__description">
       <box-icon name='plus'></box-icon>
       <div class="description__info">
-        <p id="p1">Money Machine</p>
-        <p id="p2">1000 Gecks</p>
+        <p id="p1">${this.trackInfo.name}</p>
+        <p id="p2">${this.trackInfo.artist}</p>
       </div>
       <box-icon name='heart'></box-icon>
     </div>
@@ -89,7 +103,7 @@ class Myelementup extends LitElement{
       <div class="bar__bar">
         <div class="bar__in"></div>
       </div>
-    </div>
+    </div> 
     `;
   }
 }

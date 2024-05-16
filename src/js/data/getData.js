@@ -1,47 +1,33 @@
 import { LitElement } from "lit";
+export async function obtenerDatosSpotify(){
 
-export class GetDataTracks extends LitElement{
-
-    static get properties() {
-        return {
-            url: {type: String},
-            method: {type: String}
+    const url = 'https://spotify23.p.rapidapi.com/tracks/?ids=4WNcduiCmDNfmTEz7JvmLv';
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': 'b92047cc4dmsh664196f27e89cd3p1d206fjsn0288330841f9',
+            'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
         }
-    }
+    };
 
-    firstUpdated() {
-        this.getData();
-    }
+    try {
+        const response = await fetch(url, options);
+        const data = await response.json();
+        const track = data.tracks[0];
 
-    _sendDataTracks(data){
-        this.dispatchEvent(new CustomEvent("ApiData", {
-            detail: data,
-            bubbles: true,
-            composed: true
-        }));
-    }
-
-    async getData() {
-
-        const url = 'https://spotify23.p.rapidapi.com/recommendations/?limit=20&seed_tracks=0c6xIDDpzE81m2q797ordA&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry';
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': 'b92047cc4dmsh664196f27e89cd3p1d206fjsn0288330841f9',
-                'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
-            }
-        };
-
-        try {
-            const response = await fetch(url, options);
-            const result = await response.text();
-            this._sendDataTracks(result.tracks);
-        } catch (error) {
-            console.error(error);
+        const trackInfo = {
+            name: track.name,
+            duration: track.duration_ms,
+            artist: track.artists[0].name,
+            img: track.album.images[0].url
         }
 
+        return trackInfo
+
+    } catch(error){
+        console.error(error);
+        return null;
     }
 
 }
 
-customElements.define('get-data', GetDataTracks)

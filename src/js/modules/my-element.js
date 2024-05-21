@@ -25,17 +25,19 @@ export class Myelementup extends LitElement{
   }
 
   static styles = css`
+
     *{
       padding: 0;
       margin: 0;
       box-sizing: border-box;
+      font-family: MiFuente, Arial, sans-serif;
     }
     .middleup__cont__img{
       width: 100%;
       display: flex;
       justify-content: center;
       & img{
-        width: 50%
+        width: 90%
       }
     }
     .middleup__description{
@@ -44,7 +46,7 @@ export class Myelementup extends LitElement{
       justify-content: space-evenly;
       align-items: center;
       text-align: center;
-      font-size: 1vw;
+      font-size: 1.2vw;
       padding: 20px 0;
     }
     #p1{
@@ -58,13 +60,8 @@ export class Myelementup extends LitElement{
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      
-      
-
-      & p{
-        
-      }
     }
+
     .bar__bar{
       width: 100%;
       height: 5px;
@@ -78,22 +75,42 @@ export class Myelementup extends LitElement{
       height: 100%;
       background-color: green;
     }
+
+    box-icon:hover {
+      cursor: pointer;
+    }
+
+    box-icon {
+      
+    }
+
+    i{
+      color: #9BD8B5;
+      font-size: 2vw;
+    }
+
+    i:hover{
+      cursor: pointer;  
+    }
+
   `
 
 
   render(){
+    let firstTrack = this.trackInfo.tracks.items[0] 
+    console.log(this.trackInfo)
     return html`
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <div class="middleup__cont__img">
-      <img src="${this.trackInfo.img}">
+      <img src="${this.trackInfo.images[0].url}">
     </div>
     <div class="middleup__description">
-      <box-icon name='plus'></box-icon>
+      <i class='bx bx-plus'></i>
       <div class="description__info">
-        <p id="p1">${this.trackInfo.name}</p>
-        <p id="p2">${this.trackInfo.artist}</p>
+        <p id="p1">${firstTrack.name}</p>
+        <p id="p2">${firstTrack.artists[0].name}</p>
       </div>
-      <box-icon name='heart'></box-icon>
+      <i class='bx bx-heart'></i>
     </div>
     <div class="middleup__bar">
       <div class="bar__desc">

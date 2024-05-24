@@ -37,7 +37,7 @@ export class Myelementup extends LitElement{
       display: flex;
       justify-content: center;
       & img{
-        width: 90%
+        width: 50%
       }
     }
     .middleup__description{
@@ -97,8 +97,6 @@ export class Myelementup extends LitElement{
 
 
   render(){
-    let firstTrack = this.trackInfo.tracks.items[0] 
-    console.log(this.trackInfo)
     return html`
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <div class="middleup__cont__img">
@@ -107,8 +105,8 @@ export class Myelementup extends LitElement{
     <div class="middleup__description">
       <i class='bx bx-plus'></i>
       <div class="description__info">
-        <p id="p1">${firstTrack.name}</p>
-        <p id="p2">${firstTrack.artists[0].name}</p>
+        <p id="p1">${this.trackInfo.tracks.items[0].name}</p>
+        <p id="p2">${this.trackInfo.artists[0].name}</p>
       </div>
       <i class='bx bx-heart'></i>
     </div>
@@ -166,16 +164,29 @@ class Myelementdown extends LitElement{
     width: 50%
   }
 
+  i:hover{
+    cursor: pointer;
+  }
+
+  i{
+    color: #9BD8B5;
+    font-size: 2vw;
+  }
+
+  #music, #music1, #music2{
+    font-size: 2.8vw;
+  }
   `;
   render(){
     return html`
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <div class="middledown__play">
-      <box-icon name='shuffle'></box-icon>
-      <box-icon name='rewind' size='md'></box-icon>
-      <box-icon name='play-circle' size='lg'></box-icon>
-      <box-icon name='fast-forward' size='md'></box-icon>
-      <box-icon name='repeat'></box-icon>
+      <i class='bx bx-shuffle'></i>
+      <i class='bx bx-rewind' id="music"></i>
+      <i class='bx bx-play-circle' id="music1"></i>
+      <i class='bx bx-fast-forward' id="music2"></i>
+      <i class='bx bx-repeat'></i>
     </div>
     <div class="middledown__volume">
       <box-icon type='solid' name='volume-low'></box-icon>
